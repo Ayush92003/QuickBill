@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://quickbill-xi.vercel.app"],
+    origin: "https://quickbill-xi.vercel.app",
     credentials: true,
   })
 );
