@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
-
+import API from "../axios"; // ✅ use configured instance
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,18 +14,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password },
-        { withCredentials: true }
-      );
-
+      const res = await API.post("/auth/login", { email, password }); // ✅
       setUser(res.data.user);
       setIsAuthenticated(true);
       toast.success("Login Successfully!");
-      navigate("/dashboard"); 
+      navigate("/dashboard");
     } catch (err) {
-      toast.error("User not found")
+      console.error("Login error:", err);
+      toast.error(
+        err?.response?.data?.error || "Login failed. Please try again."
+      );
     }
   };
 

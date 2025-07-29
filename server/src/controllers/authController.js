@@ -34,7 +34,7 @@ export const register = async (req, res) => {
       token,
     });
   } catch (err) {
-    console.log("ERROR: ", err.response?.data || err.message);
+    console.log("ERROR: ", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };

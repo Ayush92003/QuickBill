@@ -30,9 +30,13 @@ function Register() {
         password: formData.password,
       });
 
+      console.log("REGISTER RESPONSE: ", res); 
+
       if (res.status === 201) {
         toast.success("Registerd Successfully");
         navigate("/dashboard");
+      } else {
+        toast.error("Unexpected response");
       }
     } catch (err) {
       console.log("ERROR: ", err.response?.data || err.message);
