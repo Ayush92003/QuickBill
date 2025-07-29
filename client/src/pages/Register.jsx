@@ -31,12 +31,14 @@ function Register() {
       });
 
       if (res.status === 201) {
-        toast.success("Registerd Successfully")
-        navigate('/dashboard')
+        toast.success("Registerd Successfully");
+        navigate("/dashboard");
       }
     } catch (err) {
-      toast.error("Registration Failed")
+      console.log("ERROR: ", err.response?.data || err.message);
+      toast.error(err.response?.data?.message || "Registration Failed");
     }
+
   };
 
   return (
