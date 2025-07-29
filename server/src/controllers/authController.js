@@ -20,8 +20,8 @@ export const register = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
     });
 
     res.status(201).json({
@@ -34,6 +34,7 @@ export const register = async (req, res) => {
       token,
     });
   } catch (err) {
+    console.log("ERROR: ", err.response?.data || err.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
