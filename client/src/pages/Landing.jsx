@@ -117,7 +117,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer id="contact" className="bg-blue-600 text-white p-6 text-center">
         <p>QuickBill © {new Date().getFullYear()} | Made with ❤️</p>
-        <p className="text-sm mt-1">Contact: ayushk92003#gmail.com</p>
+        <p className="text-sm mt-1">Contact: ayushk92003@gmail.com</p>
       </footer>
     </div>
   );
