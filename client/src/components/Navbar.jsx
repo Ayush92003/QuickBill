@@ -99,7 +99,7 @@ export default function Navbar() {
               handleLogout();
               setIsOpen(false);
             }}
-            className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-red-400 hover:bg-red-800 hover:text-white transition"
+            className="cursor-pointer w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-red-400 hover:bg-red-800 hover:text-white transition"
           >
             <LogOut size={18} />
             Logout
