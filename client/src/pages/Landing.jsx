@@ -1,20 +1,23 @@
-import { useEffect } from "react";
-import { MoveRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { MoveRight, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function LandingPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
     document.title = "QuickBill - Smart Billing Made Easy";
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-900 text-white transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-gray-900 text-white">
       {/* Navbar */}
-      <header className="flex items-center justify-between p-6 shadow-md bg-gray-800">
+      <header className="flex items-center justify-between px-6 py-4 shadow-md bg-gray-800 sticky top-0 z-50">
         <h1 className="text-2xl font-bold text-blue-400">QuickBill</h1>
 
-        <nav className="space-x-6 text-gray-200 hidden md:block">
+        {/* Desktop Nav */}
+        <nav className="space-x-6 text-gray-200 hidden md:flex">
           <a href="#features" className="hover:text-blue-400">
             Features
           </a>
@@ -26,31 +29,62 @@ export default function LandingPage() {
           </a>
         </nav>
 
-        <Link to="/login">
-          <button className="cursor-pointer hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-            Login
+        {/* Right Side */}
+        <div className="flex items-center gap-4">
+          <Link to="/login">
+            <button className="cursor-pointer hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              Login
+            </button>
+          </Link>
+
+          {/* Hamburger Icon */}
+          <button
+            className="cursor-pointer md:hidden text-gray-200 focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
-        </Link>
+        </div>
       </header>
 
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-gray-800 text-gray-200 shadow-lg px-6 py-4 space-y-3 z-40">
+          <a href="#features" className="block hover:text-blue-400">
+            Features
+          </a>
+          <a href="#testimonials" className="block hover:text-blue-400">
+            Testimonials
+          </a>
+          <a href="#contact" className="block hover:text-blue-400">
+            Contact
+          </a>
+          <Link to="/login">
+            <button className="cursor-pointer w-full mt-2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+              Login
+            </button>
+          </Link>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between p-10 md:p-20 bg-gradient-to-br from-gray-800 to-gray-900">
+      <section className="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-20 py-10 bg-gradient-to-br from-gray-800 to-gray-900">
         <motion.div
-          className="max-w-xl"
+          className="w-full md:w-1/2"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Simplify Your Billing with{" "}
             <span className="text-blue-400">QuickBill</span>
           </h2>
-          <p className="text-lg mb-6">
+          <p className="text-base md:text-lg mb-6">
             Manage your clients, generate invoices, and track payments — all in
             one place.
           </p>
           <Link to="/register">
-            <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition flex items-center">
+            <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center transition">
               Get Started <MoveRight className="ml-2" />
             </button>
           </Link>
@@ -59,19 +93,19 @@ export default function LandingPage() {
         <motion.img
           src="/images/hero.svg"
           alt="billing illustration"
-          className="w-full md:w-1/2 mt-10 md:mt-0"
+          className="w-3/4 md:w-1/2 mb-8 md:mb-0"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         />
       </section>
 
-      {/* Features */}
-      <section id="features" className="p-10 md:p-20 bg-gray-900">
+      {/* Features Section */}
+      <section id="features" className="px-6 md:px-20 py-14 bg-gray-900">
         <h3 className="text-3xl font-bold text-center mb-10">
           Why Choose QuickBill?
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             [
               "Fast Billing",
@@ -88,16 +122,16 @@ export default function LandingPage() {
               <h4 className="text-xl font-semibold text-blue-400 mb-2">
                 {title}
               </h4>
-              <p className="text-gray-300">{desc}</p>
+              <p className="text-gray-300 text-sm">{desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="p-10 md:p-20 bg-gray-800">
+      {/* Testimonials Section */}
+      <section id="testimonials" className="px-6 md:px-20 py-14 bg-gray-800">
         <h3 className="text-3xl font-bold text-center mb-10">Loved by Users</h3>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[
             ["Ayush Kumar", "QuickBill saved me hours every week. Love it!"],
             ["Pankaj R.", "Super simple and efficient for my freelance work."],
@@ -107,17 +141,22 @@ export default function LandingPage() {
             ],
           ].map(([name, review], i) => (
             <div key={i} className="bg-gray-700 p-6 rounded-2xl shadow">
-              <p className="text-gray-200 italic">“{review}”</p>
-              <p className="mt-4 font-semibold text-blue-400">– {name}</p>
+              <p className="text-gray-200 italic text-sm">“{review}”</p>
+              <p className="mt-4 font-semibold text-blue-400 text-sm">
+                – {name}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="bg-blue-600 text-white p-6 text-center">
+      <footer
+        id="contact"
+        className="bg-blue-600 text-white p-6 text-center text-sm"
+      >
         <p>QuickBill © {new Date().getFullYear()} | Made with ❤️</p>
-        <p className="text-sm mt-1">Contact: ayushk92003@gmail.com</p>
+        <p>Contact: ayushk92003@gmail.com</p>
       </footer>
     </div>
   );
