@@ -60,7 +60,6 @@ export default function Dashboard() {
 
   const totalAmount = invoices.reduce((acc, inv) => acc + inv.totalAmount, 0);
 
-  // 📊 Monthly Invoice Count
   const monthlyData = invoices.reduce((acc, invoice) => {
     const date = new Date(invoice.createdAt);
     const month = date.toLocaleString("default", { month: "short" });
@@ -73,7 +72,6 @@ export default function Dashboard() {
     return acc;
   }, []);
 
-  // 🥧 Revenue by Client
   const revenueData = invoices.reduce((acc, invoice) => {
     const client = invoice.clientName;
     const amount = invoice.totalAmount;
@@ -89,12 +87,12 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-900 text-white p-6">
+      <div className="min-h-screen bg-gray-900 text-white p-4 md:p-6">
         {/* Top Section */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">📊 Dashboard</h1>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold">📊 Dashboard</h1>
           {user && (
-            <div className="text-sm text-gray-300 text-right">
+            <div className="text-sm text-gray-300 md:text-right">
               <div>👤 {user.fullName}</div>
               <div>📧 {user.email}</div>
             </div>
@@ -102,16 +100,20 @@ export default function Dashboard() {
         </div>
 
         {/* Summary Box */}
-        <div className="bg-gray-800 p-6 rounded-xl shadow-xl mb-8">
-          <h2 className="text-xl font-semibold mb-2">Total Invoices</h2>
-          <p className="text-3xl font-bold">₹{totalAmount.toFixed(2)}</p>
+        <div className="bg-gray-800 p-4 md:p-6 rounded-xl shadow-xl mb-8">
+          <h2 className="text-lg md:text-xl font-semibold mb-2">
+            Total Invoices
+          </h2>
+          <p className="text-2xl md:text-3xl font-bold">
+            ₹{totalAmount.toFixed(2)}
+          </p>
         </div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Monthly Invoices */}
-          <div className="bg-gray-800 p-6 rounded-xl shadow-xl">
-            <h2 className="text-xl font-semibold mb-4">
+          <div className="bg-gray-800 p-4 md:p-6 rounded-xl shadow-xl">
+            <h2 className="text-lg md:text-xl font-semibold mb-4">
               Monthly Invoice Count
             </h2>
             <ResponsiveContainer width="100%" height={300}>
@@ -119,7 +121,11 @@ export default function Dashboard() {
                 <XAxis dataKey="month" stroke="#ccc" />
                 <YAxis stroke="#ccc" />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#111", border: "none" ,borderRadius:"10px"}}
+                  contentStyle={{
+                    backgroundColor: "#111",
+                    border: "none",
+                    borderRadius: "10px",
+                  }}
                 />
                 <Bar dataKey="count" fill="#6366F1" radius={[4, 4, 0, 0]} />
               </BarChart>
@@ -127,8 +133,10 @@ export default function Dashboard() {
           </div>
 
           {/* Revenue by Client */}
-          <div className="bg-gray-800 p-6 rounded-xl shadow-xl">
-            <h2 className="text-xl font-semibold mb-4">Revenue by Client</h2>
+          <div className="bg-gray-800 p-4 md:p-6 rounded-xl shadow-xl">
+            <h2 className="text-lg md:text-xl font-semibold mb-4">
+              Revenue by Client
+            </h2>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -144,7 +152,11 @@ export default function Dashboard() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{backgroundColor: "white", border: "none", borderRadius:"10px" }}
+                  contentStyle={{
+                    backgroundColor: "white",
+                    border: "none",
+                    borderRadius: "10px",
+                  }}
                 />
                 <Legend />
               </PieChart>
