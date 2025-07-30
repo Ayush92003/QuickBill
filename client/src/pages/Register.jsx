@@ -18,10 +18,10 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (formData.password !== formData.confirmPassword) {
-    //   toast.error("Password do not match")
-    //   return;
-    // }
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Password do not match")
+      return;
+    }
 
     try {
       const res = await API.post("/auth/register", {
@@ -87,7 +87,7 @@ function Register() {
               required
             />
           </div>
-          {/* <div>
+          <div>
             <label className="block text-sm text-gray-300 mb-1">
               Confirm Password
             </label>
@@ -99,7 +99,7 @@ function Register() {
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
-          </div> */}
+          </div>
           <button
             type="submit"
             className="cursor-pointer w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300"
