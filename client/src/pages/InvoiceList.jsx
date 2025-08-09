@@ -73,9 +73,14 @@ export default function InvoiceList() {
 
           {/* No Invoices */}
           {filteredInvoices.length === 0 ? (
-            <p className="text-center text-gray-400">
-              No matching invoices found.
-            </p>
+            <>
+              <p className="text-center text-gray-400">
+                No matching invoices found.
+              </p>
+              <a href="/create-invoice" className="text-blue-500 hover:underline">
+                Create a new invoice
+              </a>
+            </>
           ) : (
             <div className="bg-gray-800 rounded-xl shadow-xl overflow-x-auto">
               <table className="w-full table-auto text-left text-sm">
